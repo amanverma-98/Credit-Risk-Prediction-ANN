@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# PyTorch / ML files
+*.pth
+*.joblib
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit secrets (if any)
+secrets.toml
+
+dlenv/

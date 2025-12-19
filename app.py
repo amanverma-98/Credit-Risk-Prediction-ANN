@@ -8,14 +8,14 @@ import plotly.graph_objects as go
 from PIL import Image
 import io
 
-# ================= PAGE CONFIG =================
+#PAGE CONFIG
 st.set_page_config(
     page_title="Credit Risk AI",
     page_icon="🏦",
     layout="wide"
 )
 
-# ================= UTILITIES =================
+#UTILITIES
 def clean_text(text):
     return (
         str(text)
@@ -35,7 +35,7 @@ def get_pdf_safe_image(uploaded_image=None):
     img.save(path, "JPEG")
     return path
 
-# ================= MODEL =================
+#MODEL
 class CreditRiskANN(nn.Module):
     def __init__(self):
         super().__init__()
@@ -68,7 +68,7 @@ def load_scaler():
 model = load_model()
 scaler = load_scaler()
 
-# ================= HEADER =================
+#HEADER
 st.title("🏦 Credit Risk Prediction System")
 st.markdown(
     "AI-powered **Credit Default Prediction** using ANN + PyTorch "
@@ -76,7 +76,7 @@ st.markdown(
 )
 st.divider()
 
-# ================= INPUT FORM =================
+#INPUT FORM
 with st.form("credit_form"):
     c1, c2, c3 = st.columns(3)
 
@@ -103,7 +103,7 @@ with st.form("credit_form"):
 
     predict_btn = st.form_submit_button("🔍 Predict Credit Risk")
     
-# ================= PREDICTION =================
+#PREDICTION
 if predict_btn:
     X = np.array([[
         utilization / 100,
@@ -124,7 +124,7 @@ if predict_btn:
     with torch.no_grad():
         prob = torch.sigmoid(model(X_tensor)).item()
 
-    # ========= PREDICTION + GAUGE SIDE BY SIDE =========
+    #PREDICTION + GAUGE SIDE BY SIDE
     st.divider()
     st.subheader("🔎 Credit Risk Assessment")
 
@@ -160,7 +160,7 @@ if predict_btn:
             decision = "High Risk - Loan Rejected"
             st.error(f"{decision} ({prob:.2%})")
 
-    # ========= CUSTOMER PROFILE =========
+    #CUSTOMER PROFILE
     st.divider()
     st.subheader("👤 Customer Profile")
 
@@ -181,14 +181,14 @@ if predict_btn:
     **Active Accounts:** {open_loans}
     """)
 
-    # ========= PDF GENERATION =========
+    # PDF GENERATION
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", "B", 16)
     pdf.cell(0, 10, "Credit Risk Assessment Report", ln=True, align="C")
     pdf.ln(8)
 
-    # ================== CUSTOMER NAME + IMAGE ==================
+    # CUSTOMER NAME + IMAGE 
     safe_name = clean_text(name if name else "Unnamed Customer")
     pdf_img = get_pdf_safe_image(profile_img)
 
@@ -201,11 +201,11 @@ if predict_btn:
     pdf.set_font("Arial", "B", 14)
     pdf.multi_cell(0, 8, f"Customer Name: {safe_name}\nRisk Probability: {prob:.2%}\nDecision: {decision}")
 
-    # ================== MOVE BELOW IMAGE ==================
+    # MOVE BELOW IMAGE
     # Calculate space to move cursor below image (image height + padding)
     pdf.set_y(start_y + 35)  # 30 for image + 5 for padding
 
-    # ================== OTHER DETAILS ==================
+    # OTHER DETAILS
     pdf.set_font("Arial", "", 12)
     for k, v in {
         "Age": age,
@@ -217,11 +217,11 @@ if predict_btn:
     }.items():
         pdf.cell(0, 8, clean_text(f"{k}: {v}"), ln=True)
 
-    # ================== CONVERT TO BYTES ==================
+    # CONVERT TO BYTES
     pdf_bytes = pdf.output(dest="S").encode("latin-1")
     buffer = io.BytesIO(pdf_bytes)
 
-    # ================== STREAMLIT DOWNLOAD BUTTON ==================
+    # STREAMLIT DOWNLOAD BUTTON
     st.divider()
     c1, c2, c3 = st.columns([1, 2, 1])
     with c2:

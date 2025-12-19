@@ -6,6 +6,13 @@ The model is developed using a fully connected Artificial Neural Network (ANN) i
 
 The goal is to maximize ROC-AUC, which is the industry-standard metric for imbalanced financial datasets.
 
+## Features
+- Predicts **credit default probability** using user inputs
+- **Interactive risk gauge** and prediction display
+- **Customer profile card** with optional profile image
+- Generates **downloadable PDF report**
+- Professional, clean, and LinkedIn-ready UI
+
 ## 🎯 Problem Statement
 
 Financial institutions need to assess the creditworthiness of customers to:
@@ -98,10 +105,10 @@ Recall (Default class)
 ## 🗂️ Project Structure
 ```
 credit-risk-ann/
-│── credit_risk_ann.ipynb
-│
-└── streamlit.py
-│
+│── Credit_Risk_Prediction(ANN).ipynb
+│-- credit_model.pt
+└── app.py
+│-- scaler.pkl
 ├── requirements.txt
 └── README.md
 ```
@@ -115,10 +122,11 @@ cd credit-risk-ann
 ```
 pip install -r requirements.txt
 ```
-### 3️⃣ Run Notebook
-
+### 3️⃣ Run
+```
+streamlit run app.py
 Open credit_risk_ann.ipynb in Jupyter / Colab and run all cells.
-
+```
 ## 📦 Libraries Used
 
 -Python

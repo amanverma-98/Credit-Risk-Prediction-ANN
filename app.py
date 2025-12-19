@@ -88,7 +88,7 @@ with st.form("credit_form"):
 
     with c2:
         debt_ratio = st.slider("Debt-to-Income Ratio", 0.0, 1.0, 0.05)
-        income = st.number_input("Monthly Income (₹)", 0, 300000, 50000)
+        income = st.slider("Monthly Income (₹)", 0, 300000, 50000)
         open_loans = st.number_input("Active Credit Accounts", 0, 50, 5)
         late_90 = st.number_input("Late Payments (90+ days)", 0, 20, 0)
 

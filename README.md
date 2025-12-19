@@ -1,6 +1,6 @@
 # 🏦 Credit Risk Prediction using ANN (PyTorch)
 
-### Try it - https://credit-risk-prediction-by-aman.streamlit.app/
+### Try it - https://credit-risk-prediction-byaman.streamlit.app/
 
 ## 📌 Project Overview
 
